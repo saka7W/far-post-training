@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Far Post Training</title>
+<meta name="description" content="Small-group soccer training. 60 minutes of real reps, run by two competitive players.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #F3F2EC;
+    --bg-alt: #E8E7DF;
+    --fg: #0E1B2C;
+    --muted: #4A586A;
+    --accent: #E5531A;
+    --on-accent: #0E1B2C;
+    --scene-bg: #0E1B2C;
+    --scene-fg: #F3F2EC;
+    --scene-accent: #FF6B2C;
+    --font-display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+    --font-body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0E1B2C; --bg-alt: #162739; --fg: #F3F2EC; --muted: #A9B4C2; --accent: #FF6B2C; --on-accent: #0E1B2C; --scene-bg: #08111D;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0E1B2C; --bg-alt: #162739; --fg: #F3F2EC; --muted: #A9B4C2; --accent: #FF6B2C; --on-accent: #0E1B2C; --scene-bg: #08111D;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 17px; line-height: 1.55; padding: 0; }
+  img { max-width: 100%; }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .wrap { max-width: 1040px; margin-inline: auto; }
+  .band { padding-inline: 20px; padding-block: 56px; }
+  .alt { background: var(--bg-alt); }
+
+  header.top { padding-inline: 20px; }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; }
+  .brand { font-family: var(--font-display); font-weight: 800; font-size: 26px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; }
+  .brand span { color: var(--accent); }
+  .top-actions { display: flex; align-items: center; gap: 12px; }
+  .ig { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border: 2px solid var(--fg); border-radius: 4px; text-decoration: none; }
+  .ig:hover { background: var(--fg); color: var(--bg); }
+
+  .btn { display: inline-block; font-weight: 600; text-decoration: none; padding: 14px 26px; border-radius: 4px; border: 2px solid var(--accent); background: var(--accent); color: var(--on-accent); font-size: 18px; }
+  .btn.small { font-size: 16px; padding: 8px 18px; }
+  .btn:hover { filter: brightness(1.08); }
+  .btn.ghost { background: transparent; color: inherit; border-color: currentColor; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  .scene { background: var(--scene-bg); color: var(--scene-fg); padding-inline: 20px; padding-block: 40px 36px; }
+  .scene h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(56px, 11vw, 132px); line-height: 0.88; text-transform: uppercase; margin: 0 0 8px; text-wrap: balance; }
+  .scene h1 em { font-style: normal; color: var(--scene-accent); }
+  .scene .eyebrow { font-family: var(--font-display); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; font-size: 15px; opacity: 0.75; margin: 0 0 14px; }
+  .scene .lead { font-size: 19px; max-width: 36em; margin: 12px 0 0; }
+  .scene .cta-row { margin-top: 32px; }
+  .scene .btn.ghost:hover { background: var(--scene-fg); color: var(--scene-bg); border-color: var(--scene-fg); }
+
+  h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(36px, 6vw, 56px); line-height: 1; text-transform: uppercase; margin: 0 0 8px; text-wrap: balance; }
+  .sub { color: var(--muted); margin: 0 0 28px; max-width: 40em; }
+
+  .facts4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px 32px; margin: 0; }
+  .facts4 > div { border-top: 4px solid var(--accent); padding-top: 10px; min-width: 0; }
+  .facts4 dt { font-size: 14px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .facts4 dd { margin: 2px 0 0; font-family: var(--font-display); font-weight: 800; font-size: 30px; line-height: 1.05; text-transform: uppercase; overflow-wrap: anywhere; }
+  .facts4 dd small { display: block; font-family: var(--font-body); font-weight: 500; font-size: 15px; text-transform: none; color: var(--muted); margin-top: 4px; }
+
+  .book .price { font-family: var(--font-display); font-weight: 800; font-size: clamp(48px, 8vw, 80px); line-height: 1; margin: 0 0 12px; }
+  .book .price small { font-family: var(--font-body); font-weight: 500; font-size: 18px; color: var(--muted); }
+  .book dl { margin: 20px 0 0; display: grid; grid-template-columns: max-content 1fr; gap: 8px 20px; }
+  .book dt { font-weight: 600; }
+  .book dd { margin: 0; overflow-wrap: anywhere; }
+
+  ul.focus { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px 28px; }
+  ul.focus li { border-top: 4px solid var(--accent); padding-top: 10px; min-width: 0; }
+  ul.focus b { display: block; font-family: var(--font-display); font-weight: 800; font-size: 26px; text-transform: uppercase; line-height: 1.05; margin-bottom: 4px; }
+  .two { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .two > * { min-width: 0; }
+  .card { background: var(--bg-alt); padding: 24px; border-radius: 6px; }
+  .card h3 { font-family: var(--font-display); font-weight: 800; font-size: 26px; text-transform: uppercase; margin: 0 0 8px; }
+
+  footer { padding: 28px 20px 40px; border-top: 2px solid var(--fg); }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; font-size: 14px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">Far <span>Post</span> Training</a>
+    <div class="top-actions">
+      <a class="ig" href="https://www.instagram.com/farposttraining" rel="noopener" aria-label="Instagram @farposttraining"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a class="btn small" href="https://claude.ai/artifact/9B7Lbfwa88keaJzZoymo2t">Book now</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="scene">
+    <div class="wrap">
+      <p class="eyebrow">Small-group soccer training</p>
+      <h1>Find the <em>far post.</em></h1>
+      <p class="lead">60 minutes of real reps, in groups small enough that every player gets coached. Run by two competitive players.</p>
+
+      <div class="cta-row">
+        <a class="btn" href="https://claude.ai/artifact/9B7Lbfwa88keaJzZoymo2t">Book now</a>
+        <a class="btn ghost" href="#session">What we work on</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="info">
+    <div class="wrap">
+      <h2>The basics</h2>
+      <p class="sub">Small-group soccer training, open to players from any team.</p>
+      <dl class="facts4">
+        <div><dt>When</dt><dd>Mon, Wed, weekends</dd></div>
+        <div><dt>Where</dt><dd>Several local fields<small>Location stated on the sign-up</small></dd></div>
+        <div><dt>Group size</dt><dd>Small groups<small>60 minutes each</small></dd></div>
+        <div><dt>Price</dt><dd>$30 a session<small>First session free</small></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="band alt" id="session">
+    <div class="wrap">
+      <h2>What we work on</h2>
+      <p class="sub">Every session is about getting better with the ball, moving well, and reading the game.</p>
+      <ul class="focus">
+        <li><b>Ball skills</b> First touch, dribbling, and passing under pressure.</li>
+        <li><b>Attacking</b> Finishing, 1v1s, and creating space.</li>
+        <li><b>Defending</b> Positioning, pressing, and winning the ball back.</li>
+        <li><b>Game sense</b> Making quicker decisions in small-sided games.</li>
+        <li><b>Fitness and confidence</b> Speed, agility, and playing with more belief.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band book" id="join">
+    <div class="wrap">
+      <h2>Ready to train?</h2>
+      <p class="price">$30 <small>per player, per session. First session free.</small></p>
+      <div class="cta-row"><a class="btn" href="https://claude.ai/artifact/9B7Lbfwa88keaJzZoymo2t">Book now</a></div>
+      <dl>
+        <dt>Bring</dt><dd>Cleats and water</dd>
+        <dt>Email</dt><dd>farposttraining@outlook.com</dd>
+        <dt>Instagram</dt><dd><a href="https://www.instagram.com/farposttraining" rel="noopener">@farposttraining</a></dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="band" id="coaches">
+    <div class="wrap">
+      <h2>Your coaches</h2>
+      <p class="sub">Two players who train and compete at a high level and enjoy teaching what they have learned.</p>
+      <div class="two">
+        <div class="card"><h3>Artin Azimi</h3></div>
+        <div class="card"><h3>Parker O'Keefe</h3></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Far Post Training</span>
+    <a href="https://www.instagram.com/farposttraining" rel="noopener">@farposttraining</a>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Book a session | Far Post Training</title>
+<meta name="description" content="Book a Far Post Training small-group session or private soccer training.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Far Post Training: shared styles for index.html and booking.html */
+:root {
+  --ink: #0B2236;
+  --muted: #4B6073;
+  --chalk: #FAFBF8;
+  --white: #FFFFFF;
+  --mint: #E8F4EC;
+  --line: #DCE5DE;
+  --line-strong: #B8C7BD;
+  --pitch-900: #07301F;
+  --pitch-700: #0F5A36;
+  --pitch-500: #1E9254;
+  --card-yellow: #F6D743;
+  --err: #B3261E;
+  --focus: #0F5A36;
+  --font-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --shadow-lg: 0 30px 60px -24px rgba(7, 48, 31, 0.45), 0 18px 36px -18px rgba(11, 34, 54, 0.3);
+  --shadow-md: 0 12px 28px -12px rgba(11, 34, 54, 0.25), 0 2px 6px rgba(11, 34, 54, 0.06);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body { margin: 0; background: var(--chalk); color: var(--ink); font-family: var(--font-body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img, svg { max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.on-dark :focus-visible { outline-color: var(--card-yellow); }
+.container { width: min(1120px, 100% - 40px); margin-inline: auto; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--ink); color: #fff; padding: 8px 14px; border-radius: 8px; z-index: 20; }
+.skip:focus { left: 8px; }
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(46px, 6.4vw, 80px); }
+h2 { font-size: clamp(30px, 4vw, 46px); }
+h3 { font-size: 22px; letter-spacing: -0.01em; }
+p { margin: 0; }
+.lead { font-size: 20px; color: var(--muted); max-width: 31em; }
+.sub { color: var(--muted); max-width: 34em; margin-top: 14px; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; padding: 0 22px; border-radius: 999px; border: 1.5px solid transparent; font: 600 16px/1 var(--font-body); text-decoration: none; cursor: pointer; transition: background-color 0.15s, transform 0.15s, box-shadow 0.15s; white-space: nowrap; }
+.btn-primary { background: var(--pitch-700); color: #fff; box-shadow: 0 6px 16px -6px rgba(15, 90, 54, 0.6); }
+.btn-primary:hover { background: var(--pitch-900); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn-ghost:hover { background: var(--white); border-color: var(--ink); }
+.btn-yellow { background: var(--card-yellow); color: var(--ink); }
+.btn-yellow:hover { background: #FFE35C; }
+.btn-sm { height: 40px; padding: 0 16px; font-size: 15px; }
+.btn[disabled] { opacity: 0.6; cursor: progress; }
+
+/* Header */
+.site-header { position: sticky; top: 0; z-index: 10; background: rgba(250, 251, 248, 0.88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.site-header .container { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 16px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font: 700 20px/1 var(--font-display); letter-spacing: -0.01em; text-decoration: none; }
+.nav { display: flex; align-items: center; gap: 26px; }
+.nav a:not(.btn) { text-decoration: none; font-weight: 500; color: var(--muted); font-size: 16px; }
+.nav a:not(.btn):hover { color: var(--ink); }
+.nav a.ig:not(.btn) { flex-shrink: 0; display: inline-flex; color: var(--ink); }
+.nav a.ig:not(.btn):hover { color: var(--pitch-700); }
+
+/* Hero */
+.hero { position: relative; overflow: hidden; padding: 72px 0 112px; }
+.hero::before { content: ""; position: absolute; top: 0; right: 0; width: 56%; height: 100%; clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%); background:
+  repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.07) 0 58px, rgba(255, 255, 255, 0) 58px 116px),
+  linear-gradient(160deg, var(--pitch-500) 0%, var(--pitch-700) 55%, var(--pitch-900) 100%); }
+.hero .container { position: relative; display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+.hero-copy { display: grid; gap: 22px; justify-items: start; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+.hero-note { font-size: 15px; color: var(--muted); }
+.hero-visual { position: relative; padding: 18px 0 40px 28px; }
+.pitch { display: block; width: 100%; height: auto; border-radius: 18px; box-shadow: var(--shadow-lg); transform: rotate(-2.5deg); }
+.pitch .ball-path { stroke-dasharray: 7 9; }
+@media (prefers-reduced-motion: no-preference) {
+  .pitch .ball-path { stroke-dasharray: 520; stroke-dashoffset: 520; animation: drawpath 1.6s 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+  .pitch .ball { opacity: 0; animation: showball 0.01s 2s forwards; }
+  @keyframes drawpath { to { stroke-dashoffset: 0; } }
+  @keyframes showball { to { opacity: 1; } }
+}
+.session-card { position: absolute; left: -8px; bottom: 0; width: min(290px, 78%); background: var(--white); border-radius: 16px; padding: 18px 18px 16px; box-shadow: var(--shadow-md); border: 1px solid var(--line); display: grid; gap: 12px; }
+.session-card h3 { font-size: 18px; }
+.session-card dl { margin: 0; display: grid; gap: 8px; font-size: 15px; }
+.session-card dl div { display: flex; justify-content: space-between; gap: 12px; }
+.session-card dt { color: var(--muted); }
+.session-card dd { margin: 0; font-weight: 600; text-align: right; }
+
+/* Facts strip */
+.facts-wrap { position: relative; z-index: 2; margin-top: -48px; }
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--white); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow-md); }
+.fact { padding: 22px 24px; display: grid; gap: 4px; min-width: 0; }
+.fact + .fact { border-left: 1px solid var(--line); }
+.fact-label { font-size: 14px; color: var(--muted); }
+.fact-value { font: 700 22px/1.15 var(--font-display); letter-spacing: -0.01em; overflow-wrap: anywhere; }
+.fact-note { font-size: 14px; color: var(--muted); }
+
+/* Sections */
+.section { padding: 96px 0 0; }
+.section-head { margin-bottom: 40px; }
+
+/* Skills tiles */
+.bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.tile { grid-column: span 2; position: relative; display: flex; flex-direction: column; gap: 18px; justify-content: space-between; min-height: 250px; padding: 26px; background: var(--white); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+.tile p { color: var(--muted); font-size: 16px; margin-top: 8px; }
+.tile svg { display: block; width: 100%; height: auto; max-height: 110px; }
+.tile-wide { grid-column: span 3; }
+.tile-dark { color: #fff; border-color: transparent; background:
+  repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0 46px, rgba(255, 255, 255, 0) 46px 92px),
+  linear-gradient(155deg, var(--pitch-500), var(--pitch-900)); }
+.tile-dark p { color: rgba(255, 255, 255, 0.82); }
+.tile-mint { background: var(--mint); border-color: transparent; }
+
+/* Steps */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.step { position: relative; display: grid; gap: 14px; align-content: start; }
+.step-dot { width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font: 700 17px/1 var(--font-display); position: relative; z-index: 1; }
+.step:not(:last-child)::after { content: ""; position: absolute; top: 20px; left: 52px; right: -20px; border-top: 2px dashed var(--line-strong); }
+.step p { color: var(--muted); max-width: 22em; }
+
+/* Pricing */
+.pricing { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: center; }
+.price { display: flex; align-items: baseline; gap: 12px; margin: 18px 0 14px; }
+.price-amt { font: 700 clamp(72px, 10vw, 112px)/0.9 var(--font-display); letter-spacing: -0.04em; }
+.price-unit { color: var(--muted); font-size: 18px; }
+.pill { display: inline-block; background: var(--card-yellow); color: var(--ink); font-weight: 600; font-size: 15px; padding: 6px 14px; border-radius: 999px; }
+.included { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 28px; box-shadow: var(--shadow-md); }
+.included h3 { margin-bottom: 16px; }
+.included ul { list-style: none; margin: 0 0 24px; padding: 0; display: grid; gap: 14px; }
+.included li { display: flex; gap: 12px; align-items: flex-start; }
+.included li svg { flex: none; margin-top: 3px; }
+.included .btn { width: 100%; }
+
+/* Coaches */
+.coaches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.coach { display: flex; align-items: center; gap: 18px; background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 22px; }
+.avatar { flex: none; width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; color: #fff; font: 700 24px/1 var(--font-display); background:
+  repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0 9px, rgba(255, 255, 255, 0) 9px 18px),
+  linear-gradient(150deg, var(--pitch-500), var(--pitch-900)); }
+.coach p { color: var(--muted); font-size: 15px; }
+
+/* Closing band */
+.band { margin-top: 96px; color: #fff; padding: 88px 0; clip-path: polygon(0 56px, 100% 0, 100% 100%, 0 100%); background:
+  repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0 58px, rgba(255, 255, 255, 0) 58px 116px),
+  linear-gradient(160deg, var(--pitch-700), var(--pitch-900)); }
+.band .container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px; padding-top: 24px; }
+.band p { color: rgba(255, 255, 255, 0.85); margin-top: 10px; }
+
+/* Footer */
+.site-footer { background: var(--pitch-900); color: rgba(255, 255, 255, 0.78); padding: 28px 0 40px; font-size: 15px; margin-top: -1px; }
+.site-footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 28px; }
+.site-footer a { text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+.site-footer a:hover { color: #fff; border-color: #fff; }
+
+/* Booking page */
+.book-head { padding: 56px 0 8px; }
+.checkout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 48px; align-items: start; padding: 32px 0 96px; }
+.panel { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 28px; }
+.panel + .panel { margin-top: 20px; }
+.panel h2 { font-size: 26px; margin-bottom: 6px; }
+.hint { color: var(--muted); font-size: 15px; margin-bottom: 18px; }
+.slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+.slot { font: inherit; color: inherit; text-align: left; background: var(--white); border: 1.5px solid var(--line-strong); border-radius: 14px; padding: 14px 16px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; min-width: 0; transition: border-color 0.15s, background-color 0.15s; }
+.slot:hover { border-color: var(--pitch-500); }
+.slot[aria-pressed="true"] { border-color: var(--pitch-700); background: var(--mint); box-shadow: inset 0 0 0 1px var(--pitch-700); }
+.slot .dow { font: 700 22px/1 var(--font-display); }
+.slot .date { font-weight: 600; }
+.slot .meta { font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
+.slot .note { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+.empty { background: var(--mint); border-radius: 14px; padding: 16px 18px; color: var(--ink); margin-bottom: 16px; }
+.field { display: grid; gap: 6px; margin-bottom: 16px; min-width: 0; }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0 18px; }
+label { font-weight: 600; font-size: 15px; }
+input[type="text"], input[type="email"], input[type="tel"], textarea { font: inherit; color: var(--ink); background: var(--white); border: 1.5px solid var(--line-strong); border-radius: 10px; padding: 12px 14px; width: 100%; min-width: 0; transition: border-color 0.15s, box-shadow 0.15s; }
+input:focus, textarea:focus { outline: none; border-color: var(--pitch-700); box-shadow: 0 0 0 4px rgba(30, 146, 84, 0.2); }
+textarea { min-height: 96px; resize: vertical; }
+.hp { position: absolute; left: -5000px; width: 1px; height: 1px; overflow: hidden; }
+.err { color: var(--err); font-weight: 600; font-size: 15px; min-height: 1.3em; }
+.fine { font-size: 14px; color: var(--muted); }
+
+.summary { position: sticky; top: 92px; background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 24px; box-shadow: var(--shadow-md); display: grid; gap: 16px; }
+.summary h2 { font-size: 22px; }
+.sum-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; min-height: 24px; }
+.sum-list li { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
+.sum-list .none { color: var(--muted); }
+.sum-total { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--line); padding-top: 14px; }
+.sum-total strong { font: 700 34px/1 var(--font-display); letter-spacing: -0.02em; }
+.summary .btn { width: 100%; }
+
+.done { text-align: left; }
+.done .check { width: 56px; height: 56px; border-radius: 50%; background: var(--mint); display: grid; place-items: center; margin-bottom: 18px; }
+.done h2 { font-size: 34px; margin-bottom: 10px; }
+.done p { color: var(--muted); max-width: 36em; }
+.done .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+#request { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 14px; min-height: 260px; margin-top: 10px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+.status { font-weight: 600; margin-top: 12px; min-height: 1.3em; color: var(--pitch-700); }
+.check { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px; }
+.check input { width: 22px; height: 22px; margin-top: 2px; accent-color: var(--pitch-700); flex: none; }
+.check label { font-weight: 500; font-size: 16px; }
+.pay { margin-top: 22px; padding: 20px; border-radius: 16px; background: var(--mint); display: grid; gap: 10px; justify-items: start; }
+.pay h3 { font-size: 20px; }
+.pay p { color: var(--ink); max-width: 36em; }
+.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.seg button, .counts button { font: inherit; color: inherit; text-align: left; padding: 14px 16px; border-radius: 14px; border: 1.5px solid var(--line-strong); background: var(--white); cursor: pointer; display: grid; gap: 2px; transition: border-color 0.15s, background-color 0.15s; }
+.seg button:hover, .counts button:hover { border-color: var(--pitch-500); }
+.seg button[aria-pressed="true"], .counts button[aria-pressed="true"] { border-color: var(--pitch-700); background: var(--mint); box-shadow: inset 0 0 0 1px var(--pitch-700); }
+.seg b, .counts b { font: 700 19px/1.2 var(--font-display); }
+.seg span, .counts span { font-size: 14px; color: var(--muted); }
+.counts { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 6px; }
+.counts button { min-width: 130px; }
+.tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.tier { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 22px; display: grid; gap: 6px; align-content: start; }
+.tier .n { font-weight: 600; color: var(--muted); font-size: 15px; }
+.tier .p { font: 700 42px/1 var(--font-display); letter-spacing: -0.03em; }
+.tier .e { color: var(--muted); font-size: 14px; }
+.tier .save { justify-self: start; background: var(--card-yellow); color: var(--ink); font-weight: 600; font-size: 13px; padding: 3px 10px; border-radius: 999px; }
+@media (max-width: 980px) { .tiers { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 700px) { .seg { grid-template-columns: 1fr; } }
+.submit-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 20px; }
+.submit-row .btn { height: 52px; padding: 0 32px; }
+[hidden] { display: none !important; }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .hero { padding: 48px 0 96px; }
+  .hero::before { display: none; }
+  .hero .container { grid-template-columns: 1fr; gap: 28px; }
+  .hero-visual { padding: 36px 0 48px; isolation: isolate; }
+  .hero-visual::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: -20px; right: -20px; clip-path: polygon(0 12%, 100% 0, 100% 100%, 0 100%); background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.07) 0 58px, rgba(255, 255, 255, 0) 58px 116px),
+    linear-gradient(160deg, var(--pitch-500) 0%, var(--pitch-700) 55%, var(--pitch-900) 100%); }
+  .session-card { left: 8px; }
+  .facts { grid-template-columns: repeat(2, 1fr); }
+  .fact:nth-child(3) { border-left: 0; }
+  .fact:nth-child(n + 3) { border-top: 1px solid var(--line); }
+  .bento { grid-template-columns: repeat(2, 1fr); }
+  .tile, .tile-wide { grid-column: span 1; }
+  .tile:last-child { grid-column: span 2; }
+  .pricing { grid-template-columns: 1fr; gap: 32px; }
+  .checkout { grid-template-columns: 1fr; gap: 24px; }
+  .summary { position: static; order: -1; }
+}
+@media (max-width: 700px) {
+  .nav a:not(.btn) { display: none; }
+  .nav a.ig:not(.btn) { display: inline-flex; }
+  .section { padding-top: 72px; }
+  .steps { grid-template-columns: 1fr; gap: 28px; }
+  .step:not(:last-child)::after { top: 52px; bottom: -20px; left: 19px; right: auto; border-top: 0; border-left: 2px dashed var(--line-strong); }
+  .step { padding-left: 0; }
+  .bento { grid-template-columns: 1fr; }
+  .tile, .tile-wide, .tile:last-child { grid-column: span 1; }
+  .coaches { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: 1fr; }
+  .fact + .fact, .fact:nth-child(n + 3) { border-left: 0; border-top: 1px solid var(--line); }
+  .band { padding: 72px 0; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="Far Post Training home">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#fff" stroke="#0B2236" stroke-width="2"/><polygon points="16,10 21.7,14.1 19.5,20.9 12.5,20.9 10.3,14.1" fill="#0B2236"/><path d="M16 10V3M21.7 14.1l6.5-2.2M19.5 20.9l4 5.7M12.5 20.9l-4 5.7M10.3 14.1l-6.5-2.2" stroke="#0B2236" stroke-width="2" fill="none"/></svg>
+      Far Post Training
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a class="btn btn-ghost btn-sm" href="index.html">Back to the site</a>
+    <a class="ig" href="https://www.instagram.com/farposttraining" rel="noopener" aria-label="Far Post Training on Instagram"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+    <div class="book-head">
+      <h1>Book a session</h1>
+      <p class="lead" id="bookLead" style="margin-top:14px">Pick what you want, add your details, and pay on Square to book.</p>
+    </div>
+
+    <div class="checkout">
+      <div id="left">
+        <form id="form" novalidate>
+          <div class="panel">
+            <h2>What are you booking?</h2>
+            <p class="hint">Small-group sessions are $30 each. Private training is one player with a coach.</p>
+            <div class="seg">
+              <button type="button" id="modeGroup" aria-pressed="true"><b>Small group</b><span>$30 per session</span></button>
+              <button type="button" id="modePrivate" aria-pressed="false"><b>Private training</b><span>$60 per session, save when you book more</span></button>
+            </div>
+          </div>
+
+          <div class="panel" id="groupPanel">
+            <h2>Pick sessions</h2>
+            <p class="hint" id="slotHint">Group sessions run Mondays, Wednesdays and Saturdays. Pick as many as you like.</p>
+            <div class="slots" id="slots"></div>
+            <p class="empty" id="noSessions" hidden>No sessions are open right now. Email us at farposttraining@outlook.com and we will find a time.</p>
+            <p class="err" id="slotErr" role="alert"></p>
+          </div>
+
+          <div class="panel" id="privatePanel" hidden>
+            <h2>Pick private times</h2>
+            <p class="hint">60 minutes, one player, whichever coach is free. Mondays, Wednesdays and Saturdays. Pick up to 4 times: the more you book, the less each session costs.</p>
+            <div class="slots" id="pvSlots"></div>
+            <p class="empty" id="noPv" hidden>No private times are open right now. Email us at farposttraining@outlook.com and we will find a time.</p>
+            <p class="err" id="pvErr" role="alert"></p>
+          </div>
+
+          <div class="panel">
+            <h2>Player and contact</h2>
+            <p class="hint">We only use this to schedule sessions and reply to you.</p>
+            <div class="row">
+              <div class="field"><label for="player">Player's name</label><input id="player" type="text" autocomplete="off"></div>
+              <div class="field"><label for="parent">Parent or guardian's name</label><input id="parent" type="text" autocomplete="name"></div>
+            </div>
+            <div class="row">
+              <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="email"></div>
+              <div class="field"><label for="phone">Phone (optional)</label><input id="phone" type="tel" autocomplete="tel"></div>
+            </div>
+            <div class="field"><label for="notes">Anything we should know? (optional)</label><textarea id="notes" placeholder="Position, goalkeeper, a skill to work on, injuries"></textarea></div>
+            <p class="hint" id="firstWrap" style="margin-top:14px">First time? DM @farposttraining on Instagram or email farposttraining@outlook.com for your free first session.</p>
+            <div class="hp" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" type="text" tabindex="-1" autocomplete="off"></div>
+            <p class="err" id="formErr" role="alert"></p>
+          </div>
+
+          <div class="panel">
+            <h2>Payment</h2>
+            <p class="hint" id="payHint" style="margin-bottom:0">Next, you'll pay on Square's secure checkout. Card details are entered on Square's page, never on this site.</p>
+          </div>
+
+          <div class="submit-row">
+            <button class="btn btn-primary" type="submit" id="submit">Continue to payment</button>
+            <p class="fine">Total due next: <strong id="amt2">$0</strong></p>
+            <p class="err" id="submitErr" role="alert" style="flex-basis:100%;margin:0"></p>
+          </div>
+        </form>
+      </div>
+
+      <aside class="summary" aria-label="Your request">
+        <h2>Your request</h2>
+        <ul class="sum-list" id="sumList"><li class="none">No sessions picked yet.</li></ul>
+        <div class="sum-total"><span>Total</span><strong id="amt">$0</strong></div>
+        <p class="fine" id="why">$30 per session. First time? DM @farposttraining on Instagram or email farposttraining@outlook.com for your free first session.</p>
+        <p class="fine" id="sumNote">Nothing is charged on this page. Next, you'll pay on Square's secure checkout.</p>
+      </aside>
+    </div>
+  </div>
+
+  <div class="container" id="resultWrap" hidden>
+    <div class="panel done" id="done" tabindex="-1" style="margin-bottom:96px">
+      <div class="check"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M7 14.5l5 5L21 9" fill="none" stroke="#0F5A36" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h2 id="doneTitle">Thanks</h2>
+      <p id="doneText"></p>
+      <div class="pay" id="payBlock" hidden>
+        <h3 id="payTitle"></h3>
+        <p id="payText"></p>
+        <a class="btn btn-primary" id="payBtn" href="#" target="_blank" rel="noopener" hidden>Pay with Square</a>
+      </div>
+      <div id="fallback" hidden>
+        <label for="request" style="display:block;margin-top:18px">Your request</label>
+        <textarea id="request" readonly></textarea>
+        <div class="actions">
+          <a class="btn btn-primary" id="mail" href="#">Open in my email</a>
+          <button class="btn btn-ghost" type="button" id="copy">Copy request</button>
+        </div>
+        <p class="status" id="status" role="status"></p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-ghost" href="index.html">Back to the site</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>Far Post Training</span>
+    <span><a href="mailto:farposttraining@outlook.com">farposttraining@outlook.com</a> &nbsp; <a href="https://www.instagram.com/farposttraining" rel="noopener">@farposttraining</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* COACHES: two things to edit in this block.
+
+     1) ENDPOINT: paste your Google Apps Script web app URL between the quotes.
+        Sign-ups then save to your Google Sheet. While it is empty, the page falls
+        back to building an email the parent sends.
+
+     2) SESSIONS: add the sessions parents can book, one line each.
+        Example: { id: "a1", date: "2026-10-12", time: "17:30", place: "Field name, address", note: "Park by the gate" },
+        Dates are year-month-day, times are 24-hour, and every id must be different.
+        Past sessions hide on their own. */
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbytNXlpOAqvGoZ-Ju28ociAKC3D8Q1NJo3eLnUtVhGJPDU6rwCfg3hYjfDrntevVR6X/exec";
+
+  /* PAYMENTS_LIVE: leave false until Square finishes verifying your business.
+     While false, the page saves each request and tells parents you will email
+     them a payment link. Change it to true and parents go straight to Square
+     after sending their details. */
+  var PAYMENTS_LIVE = true;
+  var BTN_LABEL = PAYMENTS_LIVE ? "Continue to payment" : "Send request";
+
+  /* SQUARE_LINKS: one Square payment link per number of paid sessions.
+     1 = $30, 2 = $60, 3 = $90, and so on. Add a line for each link you create.
+     If a parent owes for more sessions than you have a link for, the page tells
+     them to pay the $30 link once per session. */
+  var SQUARE_LINKS = {
+    1: "https://square.link/u/8kvGacCl",
+    2: "https://square.link/u/v55E0ejB",
+    3: "https://square.link/u/O8ZcECqM",
+    4: "https://square.link/u/2cnaRQuP"
+  };
+
+  /* PRIVATE_PRICES: the total for 1, 2, 3 and 4 private sessions. Change a number
+     here to change the price everywhere on this page (also update index.html).
+     PRIVATE_LINKS: one Square link per total. Until a link is added, parents are
+     told you will send a payment link when you confirm their times. */
+  var PRIVATE_PRICES = { 1: 60, 2: 115, 3: 165, 4: 210 };
+  var PRIVATE_LINKS = {
+    1: "https://square.link/u/kvkY668N",
+    2: "https://square.link/u/5uVLExQ8",
+    3: "https://square.link/u/a147FXdp",
+    4: "https://square.link/u/LFk17pXK"
+  };
+
+  /* SESSIONS: one-off extra sessions (optional), one line each.
+     Example: { id: "a1", date: "2026-10-12", time: "17:30", place: "Field name", note: "" } */
+  var SESSIONS = [
+  ];
+
+  /* Sessions now come from the "Sessions" tab of your Google Sheet. The weekly lists
+     below are only used if ENDPOINT is empty.
+     WEEKLY SLOTS: the repeating times parents can pick. day: 1 = Monday, 3 = Wednesday,
+     6 = Saturday. time is 24-hour. place is optional (shows on the slot and in the email).
+     To change a time, edit it here. To add or remove one, add or delete a line. */
+  var WEEKLY_GROUP = [
+    { day: 1, time: "17:30" },
+    { day: 3, time: "17:30" },
+    { day: 6, time: "09:00" }
+  ];
+  var WEEKLY_PRIVATE = [
+    { day: 1, time: "16:00" }, { day: 1, time: "19:00" },
+    { day: 3, time: "16:00" }, { day: 3, time: "19:00" },
+    { day: 6, time: "10:30" }, { day: 6, time: "11:30" }
+  ];
+  var WEEKS_AHEAD = 3;      // how far ahead people can book
+  var LEAD_HOURS = 24;      // slots closer than this to start time are hidden
+  var PLACE = "";           // field name, for example "Riverside Park, Field 2"
+
+  var PRICE = 30;
+  var EMAIL = "farposttraining@outlook.com";
+  var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var picked = {};
+  var pvPicked = {};
+  var mode = "group", pvCount = 0;
+
+  function $(id) { return document.getElementById(id); }
+  function val(id) { return $(id).value.trim(); }
+  function parseDate(s) { var p = String(s).split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function fmtTime(t) { if (!t) return ""; var h = +t.slice(0, 2), m = t.slice(3, 5), ap = h >= 12 ? "PM" : "AM"; h = h % 12 || 12; return h + ":" + m + " " + ap; }
+  function midnight() { var d = new Date(); d.setHours(0, 0, 0, 0); return d; }
+  function labelFor(s) { var d = parseDate(s.date); return DAYS[d.getDay()] + ", " + MONTHS[d.getMonth()] + " " + d.getDate(); }
+  function describe(s) { return labelFor(s) + (s.time ? " at " + fmtTime(s.time) : "") + (s.place ? ", " + s.place : ""); }
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function iso(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+  function weekly(list, prefix) {
+    var out = [], now = Date.now(), start = midnight();
+    for (var k = 0; k < WEEKS_AHEAD * 7; k++) {
+      var d = new Date(start.getFullYear(), start.getMonth(), start.getDate() + k);
+      list.forEach(function (w) {
+        if (w.day !== d.getDay()) return;
+        var at = new Date(d.getFullYear(), d.getMonth(), d.getDate(), +w.time.slice(0, 2), +w.time.slice(3, 5));
+        if (at.getTime() - now < LEAD_HOURS * 3600000) return;
+        out.push({ id: prefix + iso(d) + "-" + w.time, date: iso(d), time: w.time, place: w.place || PLACE, note: w.note || "" });
+      });
+    }
+    return out;
+  }
+  function sortSessions(a) { return a.sort(function (x, y) { return (x.date + " " + x.time) < (y.date + " " + y.time) ? -1 : 1; }); }
+  /* Sessions you add in the Google Sheet "Sessions" tab are loaded here. */
+  var remote = { group: [], priv: [] }, loadState = ENDPOINT ? "loading" : "ok";
+  function future(list) {
+    var now = Date.now();
+    return list.filter(function (s) {
+      var at = parseDate(s.date); at.setHours(+(s.time || "00:00").slice(0, 2), +(s.time || "00:00").slice(3, 5));
+      return at.getTime() - now >= LEAD_HOURS * 3600000;
+    });
+  }
+  function upcoming() {
+    var t = midnight().getTime();
+    var extra = SESSIONS.filter(function (s) { return parseDate(s.date).getTime() >= t; });
+    var base = ENDPOINT ? future(remote.group) : weekly(WEEKLY_GROUP, "g");
+    return sortSessions(base.concat(extra));
+  }
+  function privateSlots() { return sortSessions(ENDPOINT ? future(remote.priv) : weekly(WEEKLY_PRIVATE, "p")); }
+  function loadSessions() {
+    if (!ENDPOINT) return;
+    fetch(ENDPOINT + "?t=" + Date.now())
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        (d.sessions || []).forEach(function (x) {
+          var id = x.date + "-" + x.time, t = String(x.type || "Group").toLowerCase();
+          var o = { date: x.date, time: x.time, place: x.place || PLACE, note: x.note || "" };
+          if (t !== "private") remote.group.push({ id: "g" + id, date: o.date, time: o.time, place: o.place, note: o.note });
+          if (t === "private" || t === "both") remote.priv.push({ id: "p" + id, date: o.date, time: o.time, place: o.place, note: o.note });
+        });
+        loadState = "ok"; renderSlots();
+      })
+      .catch(function () { loadState = "error"; renderSlots(); });
+  }
+  function pickedSessions() { return upcoming().filter(function (s) { return picked[s.id]; }); }
+  function pickedPrivate() { return privateSlots().filter(function (s) { return pvPicked[s.id]; }); }
+
+  function buildSlots(box, list, store, onChange, max) {
+    box.textContent = "";
+    list.forEach(function (s) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "slot";
+      b.setAttribute("aria-pressed", store[s.id] ? "true" : "false");
+      var d = parseDate(s.date);
+      [["dow", DAYS[d.getDay()]], ["date", MONTHS[d.getMonth()] + " " + d.getDate()], ["meta", [fmtTime(s.time), s.place].filter(Boolean).join(" at ")], ["note", s.note || ""]].forEach(function (p) {
+        if (!p[1]) return;
+        var sp = document.createElement("span"); sp.className = p[0]; sp.textContent = p[1]; b.appendChild(sp);
+      });
+      b.addEventListener("click", function () {
+        if (store[s.id]) delete store[s.id];
+        else {
+          if (max && Object.keys(store).length >= max) { $("pvErr").textContent = "You can book up to " + max + " private times at once. Unselect one first, or book again afterwards."; return; }
+          store[s.id] = true;
+        }
+        b.setAttribute("aria-pressed", store[s.id] ? "true" : "false");
+        $("slotErr").textContent = ""; $("pvErr").textContent = "";
+        onChange();
+      });
+      box.appendChild(b);
+    });
+  }
+  function renderSlots() {
+    var list = upcoming(), pl = privateSlots();
+    var msg = loadState === "loading" ? "Loading sessions..." : loadState === "error" ? "We could not load the schedule. Refresh the page, or email " + EMAIL + " and we will find a time." : "No sessions are open right now. Email " + EMAIL + " and we will find a time.";
+    $("noSessions").textContent = msg; $("noPv").textContent = msg;
+    $("noSessions").hidden = list.length > 0;
+    $("noPv").hidden = pl.length > 0;
+    buildSlots($("slots"), list, picked, renderSummary);
+    buildSlots($("pvSlots"), pl, pvPicked, renderSummary, 4);
+    renderSummary();
+  }
+
+  function groupN() { return pickedSessions().length; }
+    function amountDue() { if (mode === "private") return PRIVATE_PRICES[pickedPrivate().length] || 0; return groupN() * PRICE; }
+
+  function renderSummary() {
+    var chosen = pickedSessions(), ul = $("sumList");
+    ul.textContent = "";
+    if (mode === "private") {
+      var ps = pickedPrivate(), n = ps.length;
+      pvCount = n;
+      if (!n) {
+        var l0 = document.createElement("li"); l0.className = "none"; l0.textContent = "No private times picked yet."; ul.appendChild(l0);
+        $("amt").textContent = "$0"; $("amt2").textContent = "$0";
+        $("why").textContent = "$" + PRIVATE_PRICES[1] + " for one session. Book more and each costs less: 2 for $" + PRIVATE_PRICES[2] + ", 3 for $" + PRIVATE_PRICES[3] + ", 4 for $" + PRIVATE_PRICES[4] + ".";
+        return;
+      }
+      ps.forEach(function (s) {
+        var li = document.createElement("li");
+        var a = document.createElement("span"); a.textContent = "Private, " + labelFor(s) + ", " + fmtTime(s.time);
+        li.appendChild(a); ul.appendChild(li);
+      });
+      var lp = document.createElement("li");
+      var pa = document.createElement("span"); pa.textContent = n + (n === 1 ? " session" : " session package");
+      var pb = document.createElement("span"); pb.textContent = "$" + PRIVATE_PRICES[n];
+      lp.appendChild(pa); lp.appendChild(pb); ul.appendChild(lp);
+      var saved = n * PRIVATE_PRICES[1] - PRIVATE_PRICES[n];
+      $("amt").textContent = "$" + PRIVATE_PRICES[n]; $("amt2").textContent = "$" + PRIVATE_PRICES[n];
+      $("why").textContent = saved > 0 ? "You save $" + saved + " compared with booking them one at a time." : "$" + PRIVATE_PRICES[1] + " per session. Pick 2 or more times and save.";
+      return;
+    }
+    if (!chosen.length) {
+      var li0 = document.createElement("li"); li0.className = "none";
+      li0.textContent = "No sessions picked yet.";
+      ul.appendChild(li0);
+    }
+    chosen.forEach(function (s) {
+      var li = document.createElement("li");
+      var a = document.createElement("span"); a.textContent = labelFor(s) + (s.time ? ", " + fmtTime(s.time) : "");
+      var b = document.createElement("span"); b.textContent = "$" + PRICE;
+      li.appendChild(a); li.appendChild(b); ul.appendChild(li);
+    });
+    $("amt").textContent = "$" + amountDue(); $("amt2").textContent = "$" + amountDue();
+    $("why").textContent = "$" + PRICE + " per session. First time? DM @farposttraining on Instagram or email farposttraining@outlook.com for your free first session.";
+  }
+
+  function showPay(due) {
+    var block = $("payBlock"), btn = $("payBtn");
+    if (!PAYMENTS_LIVE) { block.hidden = true; btn.hidden = true; return; }
+    block.hidden = false; btn.hidden = true;
+    if (mode === "private") {
+      $("payTitle").textContent = "Amount due: $" + due;
+      var pl = PRIVATE_LINKS[pickedPrivate().length];
+      if (pl) {
+        $("payText").textContent = "Pay on Square's secure checkout to book.";
+        btn.textContent = "Pay $" + due + " with Square"; btn.href = pl; btn.hidden = false;
+      } else {
+        $("payText").textContent = "Payment is not set up for this option yet. Email " + EMAIL + " and we will send you a payment link.";
+      }
+      return;
+    }
+    var paid = Math.round(due / PRICE);
+    if (due <= 0) {
+      $("payTitle").textContent = "Nothing to pay yet";
+      $("payText").textContent = "Your first session is free, so there is nothing to pay.";
+      return;
+    }
+    $("payTitle").textContent = "Amount due: $" + due;
+    var link = SQUARE_LINKS[paid];
+    if (link) {
+      $("payText").textContent = "Pay on Square's secure checkout to book.";
+      btn.textContent = "Pay $" + due + " with Square"; btn.href = link; btn.hidden = false;
+    } else if (SQUARE_LINKS[1]) {
+      $("payText").textContent = "Each session is a separate $30 payment on Square's secure checkout. Pay " + paid + " times to book.";
+      btn.textContent = "Pay $" + PRICE + " with Square"; btn.href = SQUARE_LINKS[1]; btn.hidden = false;
+    } else {
+      $("payText").textContent = "Payment is not set up for this option yet. Email " + EMAIL + " and we will send you a payment link.";
+    }
+  }
+
+  function showDone(title, text, fallbackText, due) {
+    showPay(due);
+    $("doneTitle").textContent = title;
+    $("doneText").textContent = text;
+    $("fallback").hidden = !fallbackText;
+    if (fallbackText) {
+      $("request").value = fallbackText.body;
+      $("mail").href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(fallbackText.subject) + "&body=" + encodeURIComponent(fallbackText.body);
+    }
+    $("left").hidden = true;
+    document.querySelector(".summary").hidden = true;
+    document.querySelector(".checkout").hidden = true;
+    document.querySelector(".book-head").hidden = true;
+    $("resultWrap").hidden = false;
+    $("done").focus();
+    $("done").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  $("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    $("slotErr").textContent = ""; $("formErr").textContent = "";
+    var priv = mode === "private";
+    var chosen = priv ? pickedPrivate() : pickedSessions();
+    $("pvErr").textContent = "";
+    if (!chosen.length) {
+      if (priv) $("pvErr").textContent = "Pick at least one private time.";
+      else $("slotErr").textContent = "Pick at least one session.";
+      return;
+    }
+    if (!val("player")) { $("formErr").textContent = "Add the player's name."; $("player").focus(); return; }
+    if (!val("parent")) { $("formErr").textContent = "Add a parent or guardian's name."; $("parent").focus(); return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val("email"))) { $("formErr").textContent = "Add an email address we can reply to."; $("email").focus(); return; }
+
+    var sessionsText = (priv ? "Private: " : "Group: ") + chosen.map(describe).join("; ");
+    var payload = {
+      submittedAt: new Date().toISOString(),
+      player: val("player"), parent: val("parent"), email: val("email"), phone: val("phone"),
+      type: priv ? "Private" : "Group",
+      sessions: sessionsText, preferred: "", notes: val("notes"),
+      firstTime: "",
+      amountDue: "$" + amountDue(),
+      website: val("website")
+    };
+    var due = amountDue();
+
+    if (ENDPOINT) {
+      var btn = $("submit");
+      btn.disabled = true; btn.textContent = "Saving...";
+      fetch(ENDPOINT, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) })
+        .then(function () {
+          showDone("Thanks, " + payload.parent, "Your details are saved.", null, due);
+          if (!PAYMENTS_LIVE) {
+            $("doneTitle").textContent = "Request received";
+            $("doneText").textContent = "Thanks, " + payload.parent + ". We will email " + payload.email + " to confirm your times and send a secure payment link.";
+            return;
+          }
+          var pay = $("payBtn");
+          if (!pay.hidden) {
+            $("doneTitle").textContent = "Taking you to Square";
+            $("doneText").textContent = "Pay on Square's secure checkout to finish booking. If nothing happens, use the button below.";
+            setTimeout(function () { window.location.href = pay.href; }, 1200);
+          } else if (due <= 0) {
+            $("doneTitle").textContent = "You're booked";
+            $("doneText").textContent = "Your first session is free, so there is nothing to pay. Thanks, " + payload.parent + ".";
+          }
+        })
+        .catch(function () {
+          btn.disabled = false; btn.textContent = BTN_LABEL;
+          $("formErr").textContent = "The request did not send. Check your connection and try again, or email " + EMAIL + ".";
+        });
+      return;
+    }
+
+    var lines = ["Hi Far Post Training,", ""];
+    lines.push("I'd like to book " + (priv ? "private training" : "small-group") + " for " + payload.player + " at these times:");
+    chosen.forEach(function (s) { lines.push("- " + describe(s)); });
+    lines.push("", "Parent or guardian: " + payload.parent, "Email: " + payload.email);
+    if (payload.phone) lines.push("Phone: " + payload.phone);
+    if (payload.notes) lines.push("Notes: " + payload.notes);
+    lines.push("Amount due: " + payload.amountDue);
+    lines.push("", "Please confirm.", "", "Thanks, " + payload.parent);
+    showDone("Two quick steps", (PAYMENTS_LIVE ? "1. Pay on Square to book. 2. Send us the message below by email or Instagram so we know who is playing. Nothing has been sent yet." : "Send the message below by email or Instagram so we have your details. We will reply to confirm your times and send a payment link. Nothing has been sent yet."), { subject: "Session request for " + payload.player, body: lines.join("\n") }, due);
+  });
+
+  /* If a field above is missing, say so next to the button and scroll to it. */
+  $("form").addEventListener("submit", function () {
+    var msgs = ["slotErr", "pvErr", "formErr"].map(function (id) { return $(id); }).filter(function (el) { return el.textContent && el.offsetParent !== null; });
+    $("submitErr").textContent = msgs.length ? "Almost there: " + msgs[0].textContent : "";
+    if (msgs.length) msgs[0].scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
+  $("copy").addEventListener("click", function () {
+    var box = $("request"), st = $("status");
+    function fallback() { box.focus(); box.select(); st.textContent = "Select and copy the text above, then paste it into your email or message."; }
+    try {
+      navigator.clipboard.writeText(box.value).then(function () { st.textContent = "Copied. Paste it into an email or an Instagram message to @farposttraining."; }, fallback);
+    } catch (x) { fallback(); }
+  });
+
+  function setMode(m) {
+    mode = m;
+    $("modeGroup").setAttribute("aria-pressed", m === "group" ? "true" : "false");
+    $("modePrivate").setAttribute("aria-pressed", m === "private" ? "true" : "false");
+    $("groupPanel").hidden = m !== "group";
+    $("privatePanel").hidden = m !== "private";
+    $("firstWrap").hidden = m !== "group";
+    $("slotErr").textContent = ""; $("pvErr").textContent = ""; $("formErr").textContent = "";
+    renderSummary();
+  }
+  $("modeGroup").addEventListener("click", function () { setMode("group"); });
+  $("modePrivate").addEventListener("click", function () { setMode("private"); });
+
+  if (!PAYMENTS_LIVE) {
+    $("submit").textContent = BTN_LABEL;
+    $("bookLead").textContent = "Pick what you want, add your details, and send your request. We will confirm your times and send a payment link.";
+    $("payHint").textContent = "We will email you a secure Square payment link once your times are confirmed. You won't be charged on this page.";
+    $("sumNote").textContent = "Nothing is charged on this page. We will email you a secure payment link.";
+  }
+  renderSlots();
+  loadSessions();
+  if (/[?&]type=private/.test(location.search)) setMode("private");
+})();
+</script>
+
+</body>
+</html>

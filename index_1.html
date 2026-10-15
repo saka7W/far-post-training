@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Far Post Training | Small-group soccer training</title>
+<meta name="description" content="Small-group soccer training. 60 minutes of real reps, run by two competitive players.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Far Post Training: shared styles for index.html and booking.html */
+:root {
+  --ink: #0B2236;
+  --muted: #4B6073;
+  --chalk: #FAFBF8;
+  --white: #FFFFFF;
+  --mint: #E8F4EC;
+  --line: #DCE5DE;
+  --line-strong: #B8C7BD;
+  --pitch-900: #07301F;
+  --pitch-700: #0F5A36;
+  --pitch-500: #1E9254;
+  --card-yellow: #F6D743;
+  --err: #B3261E;
+  --focus: #0F5A36;
+  --font-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --shadow-lg: 0 30px 60px -24px rgba(7, 48, 31, 0.45), 0 18px 36px -18px rgba(11, 34, 54, 0.3);
+  --shadow-md: 0 12px 28px -12px rgba(11, 34, 54, 0.25), 0 2px 6px rgba(11, 34, 54, 0.06);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body { margin: 0; background: var(--chalk); color: var(--ink); font-family: var(--font-body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img, svg { max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.on-dark :focus-visible { outline-color: var(--card-yellow); }
+.container { width: min(1120px, 100% - 40px); margin-inline: auto; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--ink); color: #fff; padding: 8px 14px; border-radius: 8px; z-index: 20; }
+.skip:focus { left: 8px; }
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(46px, 6.4vw, 80px); }
+h2 { font-size: clamp(30px, 4vw, 46px); }
+h3 { font-size: 22px; letter-spacing: -0.01em; }
+p { margin: 0; }
+.lead { font-size: 20px; color: var(--muted); max-width: 31em; }
+.sub { color: var(--muted); max-width: 34em; margin-top: 14px; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; padding: 0 22px; border-radius: 999px; border: 1.5px solid transparent; font: 600 16px/1 var(--font-body); text-decoration: none; cursor: pointer; transition: background-color 0.15s, transform 0.15s, box-shadow 0.15s; white-space: nowrap; }
+.btn-primary { background: var(--pitch-700); color: #fff; box-shadow: 0 6px 16px -6px rgba(15, 90, 54, 0.6); }
+.btn-primary:hover { background: var(--pitch-900); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn-ghost:hover { background: var(--white); border-color: var(--ink); }
+.btn-yellow { background: var(--card-yellow); color: var(--ink); }
+.btn-yellow:hover { background: #FFE35C; }
+.btn-sm { height: 40px; padding: 0 16px; font-size: 15px; }
+.btn[disabled] { opacity: 0.6; cursor: progress; }
+
+/* Header */
+.site-header { position: sticky; top: 0; z-index: 10; background: rgba(250, 251, 248, 0.88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.site-header .container { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 16px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font: 700 20px/1 var(--font-display); letter-spacing: -0.01em; text-decoration: none; }
+.nav { display: flex; align-items: center; gap: 26px; }
+.nav a:not(.btn) { text-decoration: none; font-weight: 500; color: var(--muted); font-size: 16px; }
+.nav a:not(.btn):hover { color: var(--ink); }
+.nav a.ig:not(.btn) { flex-shrink: 0; display: inline-flex; color: var(--ink); }
+.nav a.ig:not(.btn):hover { color: var(--pitch-700); }
+
+/* Hero */
+.hero { position: relative; overflow: hidden; padding: 72px 0 112px; }
+.hero::before { content: ""; position: absolute; top: 0; right: 0; width: 56%; height: 100%; clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%); background:
+  repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.07) 0 58px, rgba(255, 255, 255, 0) 58px 116px),
+  linear-gradient(160deg, var(--pitch-500) 0%, var(--pitch-700) 55%, var(--pitch-900) 100%); }
+.hero .container { position: relative; display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+.hero-copy { display: grid; gap: 22px; justify-items: start; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+.hero-note { font-size: 15px; color: var(--muted); }
+.hero-visual { position: relative; padding: 18px 0 40px 28px; }
+.pitch { display: block; width: 100%; height: auto; border-radius: 18px; box-shadow: var(--shadow-lg); transform: rotate(-2.5deg); }
+.pitch .ball-path { stroke-dasharray: 7 9; }
+@media (prefers-reduced-motion: no-preference) {
+  .pitch .ball-path { stroke-dasharray: 520; stroke-dashoffset: 520; animation: drawpath 1.6s 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+  .pitch .ball { opacity: 0; animation: showball 0.01s 2s forwards; }
+  @keyframes drawpath { to { stroke-dashoffset: 0; } }
+  @keyframes showball { to { opacity: 1; } }
+}
+.session-card { position: absolute; left: -8px; bottom: 0; width: min(290px, 78%); background: var(--white); border-radius: 16px; padding: 18px 18px 16px; box-shadow: var(--shadow-md); border: 1px solid var(--line); display: grid; gap: 12px; }
+.session-card h3 { font-size: 18px; }
+.session-card dl { margin: 0; display: grid; gap: 8px; font-size: 15px; }
+.session-card dl div { display: flex; justify-content: space-between; gap: 12px; }
+.session-card dt { color: var(--muted); }
+.session-card dd { margin: 0; font-weight: 600; text-align: right; }
+
+/* Facts strip */
+.facts-wrap { position: relative; z-index: 2; margin-top: -48px; }
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--white); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow-md); }
+.fact { padding: 22px 24px; display: grid; gap: 4px; min-width: 0; }
+.fact + .fact { border-left: 1px solid var(--line); }
+.fact-label { font-size: 14px; color: var(--muted); }
+.fact-value { font: 700 22px/1.15 var(--font-display); letter-spacing: -0.01em; overflow-wrap: anywhere; }
+.fact-note { font-size: 14px; color: var(--muted); }
+
+/* Sections */
+.section { padding: 96px 0 0; }
+.section-head { margin-bottom: 40px; }
+
+/* Skills tiles */
+.bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.tile { grid-column: span 2; position: relative; display: flex; flex-direction: column; gap: 18px; justify-content: space-between; min-height: 250px; padding: 26px; background: var(--white); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+.tile p { color: var(--muted); font-size: 16px; margin-top: 8px; }
+.tile svg { display: block; width: 100%; height: auto; max-height: 110px; }
+.tile-wide { grid-column: span 3; }
+.tile-dark { color: #fff; border-color: transparent; background:
+  repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0 46px, rgba(255, 255, 255, 0) 46px 92px),
+  linear-gradient(155deg, var(--pitch-500), var(--pitch-900)); }
+.tile-dark p { color: rgba(255, 255, 255, 0.82); }
+.tile-mint { background: var(--mint); border-color: transparent; }
+
+/* Steps */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.step { position: relative; display: grid; gap: 14px; align-content: start; }
+.step-dot { width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font: 700 17px/1 var(--font-display); position: relative; z-index: 1; }
+.step:not(:last-child)::after { content: ""; position: absolute; top: 20px; left: 52px; right: -20px; border-top: 2px dashed var(--line-strong); }
+.step p { color: var(--muted); max-width: 22em; }
+
+/* Pricing */
+.pricing { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: center; }
+.price { display: flex; align-items: baseline; gap: 12px; margin: 18px 0 14px; }
+.price-amt { font: 700 clamp(72px, 10vw, 112px)/0.9 var(--font-display); letter-spacing: -0.04em; }
+.price-unit { color: var(--muted); font-size: 18px; }
+.pill { display: inline-block; background: var(--card-yellow); color: var(--ink); font-weight: 600; font-size: 15px; padding: 6px 14px; border-radius: 999px; }
+.included { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 28px; box-shadow: var(--shadow-md); }
+.included h3 { margin-bottom: 16px; }
+.included ul { list-style: none; margin: 0 0 24px; padding: 0; display: grid; gap: 14px; }
+.included li { display: flex; gap: 12px; align-items: flex-start; }
+.included li svg { flex: none; margin-top: 3px; }
+.included .btn { width: 100%; }
+
+/* Coaches */
+.coaches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.coach { display: flex; align-items: center; gap: 18px; background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 22px; }
+.avatar { flex: none; width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; color: #fff; font: 700 24px/1 var(--font-display); background:
+  repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0 9px, rgba(255, 255, 255, 0) 9px 18px),
+  linear-gradient(150deg, var(--pitch-500), var(--pitch-900)); }
+.coach p { color: var(--muted); font-size: 15px; }
+
+/* Closing band */
+.band { margin-top: 96px; color: #fff; padding: 88px 0; clip-path: polygon(0 56px, 100% 0, 100% 100%, 0 100%); background:
+  repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0 58px, rgba(255, 255, 255, 0) 58px 116px),
+  linear-gradient(160deg, var(--pitch-700), var(--pitch-900)); }
+.band .container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px; padding-top: 24px; }
+.band p { color: rgba(255, 255, 255, 0.85); margin-top: 10px; }
+
+/* Footer */
+.site-footer { background: var(--pitch-900); color: rgba(255, 255, 255, 0.78); padding: 28px 0 40px; font-size: 15px; margin-top: -1px; }
+.site-footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 28px; }
+.site-footer a { text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+.site-footer a:hover { color: #fff; border-color: #fff; }
+
+/* Booking page */
+.book-head { padding: 56px 0 8px; }
+.checkout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 48px; align-items: start; padding: 32px 0 96px; }
+.panel { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 28px; }
+.panel + .panel { margin-top: 20px; }
+.panel h2 { font-size: 26px; margin-bottom: 6px; }
+.hint { color: var(--muted); font-size: 15px; margin-bottom: 18px; }
+.slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+.slot { font: inherit; color: inherit; text-align: left; background: var(--white); border: 1.5px solid var(--line-strong); border-radius: 14px; padding: 14px 16px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; min-width: 0; transition: border-color 0.15s, background-color 0.15s; }
+.slot:hover { border-color: var(--pitch-500); }
+.slot[aria-pressed="true"] { border-color: var(--pitch-700); background: var(--mint); box-shadow: inset 0 0 0 1px var(--pitch-700); }
+.slot .dow { font: 700 22px/1 var(--font-display); }
+.slot .date { font-weight: 600; }
+.slot .meta { font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
+.slot .note { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+.empty { background: var(--mint); border-radius: 14px; padding: 16px 18px; color: var(--ink); margin-bottom: 16px; }
+.field { display: grid; gap: 6px; margin-bottom: 16px; min-width: 0; }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0 18px; }
+label { font-weight: 600; font-size: 15px; }
+input[type="text"], input[type="email"], input[type="tel"], textarea { font: inherit; color: var(--ink); background: var(--white); border: 1.5px solid var(--line-strong); border-radius: 10px; padding: 12px 14px; width: 100%; min-width: 0; transition: border-color 0.15s, box-shadow 0.15s; }
+input:focus, textarea:focus { outline: none; border-color: var(--pitch-700); box-shadow: 0 0 0 4px rgba(30, 146, 84, 0.2); }
+textarea { min-height: 96px; resize: vertical; }
+.hp { position: absolute; left: -5000px; width: 1px; height: 1px; overflow: hidden; }
+.err { color: var(--err); font-weight: 600; font-size: 15px; min-height: 1.3em; }
+.fine { font-size: 14px; color: var(--muted); }
+
+.summary { position: sticky; top: 92px; background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 24px; box-shadow: var(--shadow-md); display: grid; gap: 16px; }
+.summary h2 { font-size: 22px; }
+.sum-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; min-height: 24px; }
+.sum-list li { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
+.sum-list .none { color: var(--muted); }
+.sum-total { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--line); padding-top: 14px; }
+.sum-total strong { font: 700 34px/1 var(--font-display); letter-spacing: -0.02em; }
+.summary .btn { width: 100%; }
+
+.done { text-align: left; }
+.done .check { width: 56px; height: 56px; border-radius: 50%; background: var(--mint); display: grid; place-items: center; margin-bottom: 18px; }
+.done h2 { font-size: 34px; margin-bottom: 10px; }
+.done p { color: var(--muted); max-width: 36em; }
+.done .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+#request { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 14px; min-height: 260px; margin-top: 10px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+.status { font-weight: 600; margin-top: 12px; min-height: 1.3em; color: var(--pitch-700); }
+.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.seg button, .counts button { font: inherit; color: inherit; text-align: left; padding: 14px 16px; border-radius: 14px; border: 1.5px solid var(--line-strong); background: var(--white); cursor: pointer; display: grid; gap: 2px; transition: border-color 0.15s, background-color 0.15s; }
+.seg button:hover, .counts button:hover { border-color: var(--pitch-500); }
+.seg button[aria-pressed="true"], .counts button[aria-pressed="true"] { border-color: var(--pitch-700); background: var(--mint); box-shadow: inset 0 0 0 1px var(--pitch-700); }
+.seg b, .counts b { font: 700 19px/1.2 var(--font-display); }
+.seg span, .counts span { font-size: 14px; color: var(--muted); }
+.counts { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 6px; }
+.counts button { min-width: 130px; }
+.tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.tier { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 22px; display: grid; gap: 6px; align-content: start; }
+.tier .n { font-weight: 600; color: var(--muted); font-size: 15px; }
+.tier .p { font: 700 42px/1 var(--font-display); letter-spacing: -0.03em; }
+.tier .e { color: var(--muted); font-size: 14px; }
+.tier .save { justify-self: start; background: var(--card-yellow); color: var(--ink); font-weight: 600; font-size: 13px; padding: 3px 10px; border-radius: 999px; }
+@media (max-width: 980px) { .tiers { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 700px) { .seg { grid-template-columns: 1fr; } }
+[hidden] { display: none !important; }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .hero { padding: 48px 0 96px; }
+  .hero::before { display: none; }
+  .hero .container { grid-template-columns: 1fr; gap: 28px; }
+  .hero-visual { padding: 36px 0 48px; isolation: isolate; }
+  .hero-visual::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: -20px; right: -20px; clip-path: polygon(0 12%, 100% 0, 100% 100%, 0 100%); background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.07) 0 58px, rgba(255, 255, 255, 0) 58px 116px),
+    linear-gradient(160deg, var(--pitch-500) 0%, var(--pitch-700) 55%, var(--pitch-900) 100%); }
+  .session-card { left: 8px; }
+  .facts { grid-template-columns: repeat(2, 1fr); }
+  .fact:nth-child(3) { border-left: 0; }
+  .fact:nth-child(n + 3) { border-top: 1px solid var(--line); }
+  .bento { grid-template-columns: repeat(2, 1fr); }
+  .tile, .tile-wide { grid-column: span 1; }
+  .tile:last-child { grid-column: span 2; }
+  .pricing { grid-template-columns: 1fr; gap: 32px; }
+  .checkout { grid-template-columns: 1fr; gap: 24px; }
+  .summary { position: static; order: -1; }
+}
+@media (max-width: 700px) {
+  .nav a:not(.btn) { display: none; }
+  .nav a.ig:not(.btn) { display: inline-flex; }
+  .section { padding-top: 72px; }
+  .steps { grid-template-columns: 1fr; gap: 28px; }
+  .step:not(:last-child)::after { top: 52px; bottom: -20px; left: 19px; right: auto; border-top: 0; border-left: 2px dashed var(--line-strong); }
+  .step { padding-left: 0; }
+  .bento { grid-template-columns: 1fr; }
+  .tile, .tile-wide, .tile:last-child { grid-column: span 1; }
+  .coaches { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: 1fr; }
+  .fact + .fact, .fact:nth-child(n + 3) { border-left: 0; border-top: 1px solid var(--line); }
+  .band { padding: 72px 0; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="Far Post Training home">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#fff" stroke="#0B2236" stroke-width="2"/><polygon points="16,10 21.7,14.1 19.5,20.9 12.5,20.9 10.3,14.1" fill="#0B2236"/><path d="M16 10V3M21.7 14.1l6.5-2.2M19.5 20.9l4 5.7M12.5 20.9l-4 5.7M10.3 14.1l-6.5-2.2" stroke="#0B2236" stroke-width="2" fill="none"/></svg>
+      Far Post Training
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#skills">What we work on</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#private">Private</a>
+      <a href="#coaches">Coaches</a>
+      <a class="btn btn-primary btn-sm" href="booking.html">Book now</a>
+    <a class="ig" href="https://www.instagram.com/farposttraining" rel="noopener" aria-label="Far Post Training on Instagram"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="container">
+      <div class="hero-copy">
+        <h1>Find the far post.</h1>
+        <p class="lead">Small-group soccer training. 60 minutes of real reps, in groups small enough that every player gets coached. Run by two competitive players.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="booking.html">Book a session</a>
+          <a class="btn btn-ghost" href="#skills">See what we work on</a>
+        </div>
+        <p class="hero-note">$30 a session. First time? DM us on Instagram or email for a free first session.</p>
+      </div>
+
+      <div class="hero-visual">
+        <svg class="pitch" viewBox="0 0 520 468" role="img" aria-label="Top-down view of a penalty area. A ball curls in from the right wing to the far post, where a striker is waiting.">
+          <defs>
+            <pattern id="mow" width="130" height="468" patternUnits="userSpaceOnUse">
+              <rect width="65" height="468" fill="#1E9254"/>
+              <rect x="65" width="65" height="468" fill="#1A8A4E"/>
+            </pattern>
+          </defs>
+          <rect width="520" height="468" fill="url(#mow)"/>
+          <g transform="translate(0,28)" fill="none" stroke="#fff" stroke-width="3" stroke-opacity="0.92">
+            <line x1="0" y1="30" x2="520" y2="30"/>
+            <rect x="50" y="30" width="420" height="200"/>
+            <rect x="165" y="30" width="190" height="80"/>
+            <path d="M195.6 230 A88 88 0 0 0 324.4 230"/>
+            <rect x="210" y="6" width="100" height="24" fill="#fff" fill-opacity="0.14"/>
+            <circle cx="260" cy="170" r="3" fill="#fff" stroke="none"/>
+
+            <path class="ball-path" d="M470 360 C 400 290, 250 250, 222 44" stroke="#F6D743" stroke-width="4.5" stroke-linecap="round"/>
+            <g class="ball">
+              <circle cx="470" cy="360" r="13" fill="#fff" stroke="#0B2236" stroke-width="2.5"/>
+              <polygon points="470,354.5 475.2,358.3 473.2,364.4 466.8,364.4 464.8,358.3" fill="#0B2236" stroke="none"/>
+            </g>
+            <circle cx="300" cy="130" r="10" fill="#0B2236" stroke="#fff" stroke-width="2.5"/>
+            <circle cx="196" cy="150" r="10" fill="#0B2236" stroke="#fff" stroke-width="2.5"/>
+            <circle cx="232" cy="92" r="11" fill="#F6D743" stroke="#0B2236" stroke-width="2.5"/>
+          </g>
+          <g font-family="Instrument Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#fff">
+            <text x="198" y="22" text-anchor="end">Far post</text>
+            <text x="322" y="22">Near post</text>
+          </g>
+        </svg>
+
+        <div class="session-card">
+          <h3>Small-group session</h3>
+          <dl>
+            <div><dt>Length</dt><dd>60 minutes</dd></div>
+            <div><dt>Group</dt><dd>Small</dd></div>
+            <div><dt>Price</dt><dd>$30 a session</dd></div>
+          </dl>
+          <a class="btn btn-primary btn-sm" href="booking.html">Book a spot</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="facts-wrap">
+    <div class="container">
+      <div class="facts">
+        <div class="fact"><span class="fact-label">When</span><span class="fact-value">Mon, Wed, weekends</span></div>
+        <div class="fact"><span class="fact-label">Where</span><span class="fact-value">Several local fields</span><span class="fact-note">Location is on the sign-up</span></div>
+        <div class="fact"><span class="fact-label">Group size</span><span class="fact-value">Small groups</span><span class="fact-note">60 minutes each</span></div>
+        <div class="fact"><span class="fact-label">Price</span><span class="fact-value">$30 a session</span><span class="fact-note">DM or email for a free first session</span></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section-head">
+        <h2>What we work on</h2>
+        <p class="sub">Every session is about getting better with the ball, moving well, and reading the game. Open to players from any team.</p>
+      </div>
+
+      <div class="bento">
+        <article class="tile tile-wide">
+          <div>
+            <h3>Ball skills</h3>
+            <p>First touch, dribbling, and passing under pressure.</p>
+          </div>
+          <svg viewBox="0 0 240 100" aria-hidden="true">
+            <path d="M10 50 C 40 12 58 88 98 50 S 152 12 184 50 S 218 88 228 50" fill="none" stroke="#1E9254" stroke-width="3.5" stroke-linecap="round"/>
+            <g fill="#F28C28"><polygon points="40,92 54,92 47,74"/><polygon points="98,92 112,92 105,74"/><polygon points="156,92 170,92 163,74"/></g>
+            <circle cx="230" cy="50" r="9" fill="#fff" stroke="#0B2236" stroke-width="2.5"/>
+          </svg>
+        </article>
+
+        <article class="tile tile-wide tile-dark on-dark">
+          <div>
+            <h3>Attacking</h3>
+            <p>Finishing, 1v1s, and creating space.</p>
+          </div>
+          <svg viewBox="0 0 240 100" aria-hidden="true">
+            <rect x="70" y="8" width="100" height="40" fill="#fff" fill-opacity="0.1" stroke="#fff" stroke-width="3"/>
+            <g stroke="#fff" stroke-opacity="0.35" stroke-width="1.5"><line x1="95" y1="8" x2="95" y2="48"/><line x1="120" y1="8" x2="120" y2="48"/><line x1="145" y1="8" x2="145" y2="48"/><line x1="70" y1="28" x2="170" y2="28"/></g>
+            <path d="M30 92 Q 52 50 88 34" fill="none" stroke="#F6D743" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="2 8"/>
+            <path d="M212 92 Q 190 50 152 34" fill="none" stroke="#F6D743" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="2 8"/>
+            <circle cx="30" cy="92" r="7" fill="#fff"/><circle cx="212" cy="92" r="7" fill="#fff"/>
+          </svg>
+        </article>
+
+        <article class="tile tile-mint">
+          <div>
+            <h3>Defending</h3>
+            <p>Positioning, pressing, and winning the ball back.</p>
+          </div>
+          <svg viewBox="0 0 240 100" aria-hidden="true">
+            <line x1="40" y1="68" x2="200" y2="68" stroke="#0F5A36" stroke-width="2.5" stroke-dasharray="5 6"/>
+            <g fill="#0B2236"><circle cx="48" cy="68" r="9"/><circle cx="96" cy="68" r="9"/><circle cx="144" cy="68" r="9"/><circle cx="192" cy="68" r="9"/></g>
+            <circle cx="120" cy="18" r="9" fill="#F6D743" stroke="#0B2236" stroke-width="2.5"/>
+            <path d="M120 32 L120 52" stroke="#0B2236" stroke-width="2.5" stroke-linecap="round"/><path d="M114 47 L120 54 L126 47" fill="none" stroke="#0B2236" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </article>
+
+        <article class="tile">
+          <div>
+            <h3>Game sense</h3>
+            <p>Making quicker decisions in small-sided games.</p>
+          </div>
+          <svg viewBox="0 0 240 100" aria-hidden="true">
+            <polygon points="46,50 218,6 218,94" fill="#1E9254" fill-opacity="0.16"/>
+            <path d="M46 50 L186 24 M46 50 L196 78" stroke="#0F5A36" stroke-width="2.5" stroke-dasharray="4 6"/>
+            <circle cx="46" cy="50" r="10" fill="#F6D743" stroke="#0B2236" stroke-width="2.5"/>
+            <g fill="#0B2236"><circle cx="190" cy="23" r="8"/><circle cx="200" cy="79" r="8"/></g>
+          </svg>
+        </article>
+
+        <article class="tile">
+          <div>
+            <h3>Fitness and confidence</h3>
+            <p>Speed, agility, and playing with more belief.</p>
+          </div>
+          <svg viewBox="0 0 240 100" aria-hidden="true">
+            <g fill="none" stroke="#0B2236" stroke-width="2.5"><rect x="20" y="22" width="200" height="56" rx="3"/><line x1="53" y1="22" x2="53" y2="78"/><line x1="87" y1="22" x2="87" y2="78"/><line x1="120" y1="22" x2="120" y2="78"/><line x1="153" y1="22" x2="153" y2="78"/><line x1="187" y1="22" x2="187" y2="78"/></g>
+            <g fill="#1E9254"><circle cx="36" cy="38" r="7"/><circle cx="70" cy="62" r="7"/><circle cx="103" cy="38" r="7"/><circle cx="137" cy="62" r="7"/><circle cx="170" cy="38" r="7"/><circle cx="204" cy="62" r="7"/></g>
+          </svg>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="container">
+      <div class="section-head">
+        <h2>How booking works</h2>
+        <p class="sub">It takes a couple of minutes, and you can book more than one session at a time.</p>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="step-dot">1</span><h3>Pick your sessions</h3><p>Choose the sessions that fit your week.</p></li>
+        <li class="step"><span class="step-dot">2</span><h3>Add your details</h3><p>Tell us who is playing and how to reach you.</p></li>
+        <li class="step"><span class="step-dot">3</span><h3 id="step3h">Confirm and pay</h3><p id="step3p">We confirm your times and email you a secure Square payment link.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="pricing">
+    <div class="container pricing">
+      <div>
+        <h2>Simple pricing</h2>
+        <div class="price"><span class="price-amt">$30</span><span class="price-unit">per player, per session</span></div>
+        <span class="pill">DM or email for a free first session</span>
+      </div>
+      <div class="included">
+        <h3>Every session includes</h3>
+        <ul>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#1E9254"/><path d="M5.5 10.4l3 3 6-6.4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>60 minutes of coached reps</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#1E9254"/><path d="M5.5 10.4l3 3 6-6.4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>A small group, so every player gets coached</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#1E9254"/><path d="M5.5 10.4l3 3 6-6.4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Open to players from any team</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#1E9254"/><path d="M5.5 10.4l3 3 6-6.4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Bring cleats and water, we bring the rest</li>
+        </ul>
+        <a class="btn btn-primary" href="booking.html">Book a session</a>
+      </div>
+    </div>
+    <div class="container" style="margin-top:40px">
+      <h3 style="margin-bottom:16px">Small-group packages</h3>
+      <div class="tiers">
+        <div class="tier"><span class="n">1 session</span><span class="p">$30</span><span class="e">$30 each</span></div>
+        <div class="tier"><span class="n">2 sessions</span><span class="p">$60</span><span class="e">$30 each</span></div>
+        <div class="tier"><span class="n">3 sessions</span><span class="p">$90</span><span class="e">$30 each</span></div>
+        <div class="tier"><span class="n">4 sessions</span><span class="p">$120</span><span class="e">$30 each</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="private">
+    <div class="container">
+      <div class="section-head">
+        <h2>Private training</h2>
+        <p class="sub">One player, one coach, 60 minutes. We match you with whichever coach is free. Book more sessions and save.</p>
+      </div>
+      <div class="tiers">
+        <div class="tier"><span class="n">1 session</span><span class="p">$60</span><span class="e">$60 each</span></div>
+        <div class="tier"><span class="n">2 sessions</span><span class="p">$115</span><span class="e">$57.50 each</span><span class="save">Save $5</span></div>
+        <div class="tier"><span class="n">3 sessions</span><span class="p">$165</span><span class="e">$55 each</span><span class="save">Save $15</span></div>
+        <div class="tier"><span class="n">4 sessions</span><span class="p">$210</span><span class="e">$52.50 each</span><span class="save">Save $30</span></div>
+      </div>
+      <div class="hero-actions" style="margin-top:28px"><a class="btn btn-primary" href="booking.html?type=private">Book private training</a></div>
+    </div>
+  </section>
+
+  <section class="section" id="coaches">
+    <div class="container">
+      <div class="section-head">
+        <h2>Your coaches</h2>
+        <p class="sub">Two players who train and compete at a high level and enjoy teaching what they have learned.</p>
+      </div>
+      <div class="coaches">
+        <div class="coach"><span class="avatar" aria-hidden="true">AA</span><div><h3>Artin Azimi</h3><p>Coach</p></div></div>
+        <div class="coach"><span class="avatar" aria-hidden="true">PO</span><div><h3>Parker O'Keefe</h3><p>Coach</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band on-dark">
+    <div class="container">
+      <div>
+        <h2>Ready to train?</h2>
+        <p>First time? DM @farposttraining or email us for a free first session.</p>
+      </div>
+      <a class="btn btn-yellow" href="booking.html">Book a session</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>Far Post Training</span>
+    <span><a href="mailto:farposttraining@outlook.com">farposttraining@outlook.com</a> &nbsp; <a href="https://www.instagram.com/farposttraining" rel="noopener">@farposttraining</a></span>
+  </div>
+</footer>
+
+<script>
+/* Set PAYMENTS_LIVE to true (here and in booking.html) once Square finishes verifying your business. */
+var PAYMENTS_LIVE = true;
+if (PAYMENTS_LIVE) {
+  document.getElementById("step3h").textContent = "Pay on Square";
+  document.getElementById("step3p").textContent = "Check out on Square's secure page and you're booked.";
+}
+</script>
+</body>
+</html>
